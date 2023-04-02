@@ -1,0 +1,2 @@
+class AddQuantityToLineItem < ApplicationRecord
+end
