@@ -10,13 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_01_211048) do
-  create_table "add_quantity_to_line_items", force: :cascade do |t|
-    t.integer "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_04_03_075726) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -24,11 +18,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_211048) do
 
   create_table "line_items", force: :cascade do |t|
     t.integer "product_id", null: false
-    t.integer "cart_id", null: false
+    t.integer "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quantity", default: 1
+    t.integer "order_id"
     t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
@@ -51,5 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_211048) do
   end
 
   add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
 end
