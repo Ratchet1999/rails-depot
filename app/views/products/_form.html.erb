@@ -11,24 +11,39 @@
   </div>
   <% end %>
   
+   <div class="field">
+  <%= form.label :enabled, style: 'display: block' %>
+  <%= form.check_box :enabled, style: 'display: block' %>
+  </div>
+  
   <div class="field">
-  <%= form.label :title %>
+  <%= form.label :title, style: 'display: block' %>
   <%= form.text_field :title %>
   </div>
 
   <div class="field">
-  <%= form.label :description %>
-  ➤ <%= form.text_area :description, rows: 10, cols: 60 %>
+  <%= form.label :description , style: 'display: block'%>
+  <%= form.text_area :description, rows: 10, cols: 60 %>
   </div>
 
   <div class="field">
-  <%= form.label :image_url %>
-  <%= form.text_field :image_url %>
+  <%= form.label :image_url , style: 'display: block'%>
+  <%= form.text_field :image_url , style: 'display: block'%>
   </div>
 
   <div class="field">
-  <%= form.label :price %>
-  <%= form.text_field :price %>
+  <%= form.label :price , style: 'display: block'%>
+  <%= form.text_field :price , style: 'display: block' %>
+  </div>
+
+  <div class="field">
+  <%= form.label :discount_price , style: 'display: block'%>
+  <%= form.text_field :discount_price , style: 'display: block' %>
+  </div>
+
+  <div class="field">
+  <%= form.label :permalink , style: 'display: block'%>
+  <%= form.text_field :permalink , style: 'display: block'%>
   </div>
 
   <div class="actions">
