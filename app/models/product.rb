@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  has_many :line_items
+  has_many :orders, through: :line_items
 
   validates_with PriceValidator
   validates :url, presence: true, url: true
@@ -10,23 +12,24 @@ class Product < ApplicationRecord
   validates :price, numericality: {greater_than: :discount_price, message: "Discount Price can't be greater than Original Price"}
   validates :words_in_description, length: { in: 5..10 }
 
-  has_many :line_items
-  has_many :orders, through: :line_items
-  
+  before_validation :set_discount_price
   before_destroy :ensure_not_referenced_by_any_line_item
 
   private
 
   # ensure that there are no line items referencing this product
-   def ensure_not_referenced_by_any_line_item
+  def ensure_not_referenced_by_any_line_item
     unless line_items.empty?
       errors.add(:base, 'Line Items present')
       throw :abort
     end
-   end
+  end
 
-   def words_in_description
+  def words_in_description
     description&.split
-   end
-end
+  end
 
+  after_initialize do |product|
+    product.title = 'abc' unless product.title
+  end
+end
