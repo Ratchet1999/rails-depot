@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
-  validates :email, uniqueness: true, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
+  validates :email, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
   has_secure_password
   after_destroy :ensure_an_admin_remains
   class Error < StandardError
