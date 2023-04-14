@@ -19,6 +19,14 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def orders
+    @user = User.find(session[:user_id])
+  end
+
+  def line_item
+    @user = User.find(session[:user_id])
+  end
+
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
