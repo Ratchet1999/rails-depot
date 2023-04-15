@@ -1,6 +1,8 @@
 require 'pago'
 class Order < ApplicationRecord
+   belongs_to :user, foreign_key: :users_id
    has_many :line_items, dependent: :destroy
+   scope :by_date , ->(from = Time.now.midnight,to = Time.now){where( created_at: (from..to))}
    enum pay_type: {
 "Check" => 0,
 "Credit card" => 1,
@@ -15,7 +17,7 @@ class Order < ApplicationRecord
      line_items << item
     end
  end
-
+ 
 def charge!(pay_type_params)
    payment_details = {}
    payment_method = nil
