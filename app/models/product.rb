@@ -2,7 +2,7 @@ class Product < ApplicationRecord
 
   validates_with PriceValidator
   validates :url, presence: true, url: true
-  validates :title, :description, presence: { message: "can't be blank"}
+  validates :title, :description, presence: true
   validates :title, uniqueness: true
   validates :image_url, allow_blank: true, format: { with: IMAGE_URL_REGEX, message: 'must be a URL for GIF, JPG or PNG image.'}
   validates :permalink, uniqueness: true, format: { with: PERMALINK_REGEX, message: 'is not in valid format'}
@@ -16,7 +16,7 @@ class Product < ApplicationRecord
   before_destroy :ensure_not_referenced_by_any_line_item
 
   private
-  
+
   # ensure that there are no line items referencing this product
    def ensure_not_referenced_by_any_line_item
     unless line_items.empty?
