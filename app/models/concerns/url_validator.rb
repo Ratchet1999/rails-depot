@@ -7,3 +7,4 @@ class UrlValidator < ActiveModel::Validator
     end
   end
 end
+

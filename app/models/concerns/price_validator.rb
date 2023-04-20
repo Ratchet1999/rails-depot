@@ -5,3 +5,4 @@ class PriceValidator < ActiveModel::Validator
     end
   end
 end
+
