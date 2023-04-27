@@ -13,7 +13,6 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-    @categories = Category.order(:name)
   end
 
   # GET /products/1/edit
