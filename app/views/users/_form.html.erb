@@ -15,7 +15,7 @@
     <h2>Enter User Details</h2>
 
     <div class="field">
-      <%= form.label :name, 'Name; ' %>
+      <%= form.label :name, 'Name: ' %>
       <%= form.text_field :name %>
     </div>
 
@@ -38,13 +38,19 @@
     </div>
 
     <div class="field">
-      <%= form.label :password_confirmation, 'Confirm; ' %>
+      <%= form.label :password_confirmation, 'Confirm: ' %>
       <%= form.password_field( 
           :password_confirmation,
         id: :user_password_confirmation,
         size: 40
       )%>
     </div>
+
+    <div class="field">
+      <%= form.label :role, 'Role: ' %>
+      <%= form.text_field :role %>
+    </div>
+
     <h3>Enter User's Address Details</h3>
     <%= form.fields_for :address, @user.address do |address_form| %>
       <div class="field">

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :orders, dependent: :destroy, foreign_key: :users_id
   has_many :line_items, through: :orders
+  has_one :hit_count, dependent: :nullify
 
   validates :name, presence: true, uniqueness: true
   validates :email, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
@@ -12,6 +13,10 @@ class User < ApplicationRecord
   class Error < StandardError
   end
 
+  def admin?
+    role.capitalize == 'Admin'
+  end
+
   private
 
   def ensure_an_admin_remains
@@ -19,4 +24,5 @@ class User < ApplicationRecord
       raise Error.new "Can't delete last user"
     end
   end
+
 end

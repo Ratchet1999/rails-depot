@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params.except(:address_attributes))
     @user.build_address(user_params[:address_attributes])
+    @user.build_hit_count
     respond_to do |format|
       if @user.save
         format.html { redirect_to users_url,notice: "User #{@user.name} was successfully created." }
@@ -80,8 +81,8 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(
-        :name, :password, :password_confirmation, :email,
-        address_attributes: [:state, :country, :city, :pincode ]
+        :name, :password, :password_confirmation, :email, :role,
+        address_attributes: %i[state country city pincode]
       )
     end
 end
