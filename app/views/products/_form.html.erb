@@ -1,52 +1,62 @@
-<%= form_with(model: product, local: true) do |form| %>
+<%= form_with(model: product) do |form| %>
   <% if product.errors.any? %>
-  <div id="error_explanation">
-  <h2><%= pluralize(product.errors.count, "error") %>
-  prohibited this product from being saved:</h2>
-  <ul>
-  <% product.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
+    <div class="form-errors">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-  </ul>
+
+  <div>
+    <%= form.label :enabled %>
+    <%= form.check_box :enabled %>
   </div>
-  <% end %>
-  
-   <div class="field">
-  <%= form.label :enabled, style: 'display: block' %>
-  <%= form.check_box :enabled, style: 'display: block' %>
+
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
   </div>
-  
-  <div class="field">
-  <%= form.label :title, style: 'display: block' %>
-  <%= form.text_field :title %>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description, rows:10, cols: 60 %>
+  </div>
+
+  <div>
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url %>
   </div>
 
   <div class="field">
-  <%= form.label :description , style: 'display: block'%>
-  <%= form.text_area :description, rows: 10, cols: 60 %>
+    <%= form.label :category_id, style: 'display: block' %>
+    <%= form.collection_select :category_id , Category.order(:name), :id, :name, include_blank: t('form.select.select_one') %>
+  </div>
+
+  <div>
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :discount_price %>
+    <%= form.number_field :discount_price %>
+  </div>
+
+  <div>
+    <%= form.label :permalink %>
+    <%= form.text_field :permalink %>
   </div>
 
   <div class="field">
-  <%= form.label :image_url , style: 'display: block'%>
-  <%= form.text_field :image_url , style: 'display: block'%>
+    <%= form.label :images, 'Product Images' %>
+    <%= form.file_field :images, accept: 'image/png,image/gif,image/jpeg,image/jpg' ,multiple: true%>
   </div>
+  <br></br>
 
-  <div class="field">
-  <%= form.label :price , style: 'display: block'%>
-  <%= form.text_field :price , style: 'display: block' %>
+  <div>
+    <%= form.submit %>
   </div>
-
-  <div class="field">
-  <%= form.label :discount_price , style: 'display: block'%>
-  <%= form.text_field :discount_price , style: 'display: block' %>
-  </div>
-
-  <div class="field">
-  <%= form.label :permalink , style: 'display: block'%>
-  <%= form.text_field :permalink , style: 'display: block'%>
-  </div>
-
-  <div class="actions">
-  <%= form.submit %>
-  </div>
-  <% end %>
+<% end %>

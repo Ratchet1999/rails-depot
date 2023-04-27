@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   get 'admin' => 'admin#index'
   controller :sessions do
     get 'login' => :new
@@ -11,7 +12,10 @@ Rails.application.routes.draw do
   # get '/users/new', to: "products#new"
 
 
-  resources :users
+      get "users/orders", to: "users#orders"
+      get "users/line_item", to: "users#line_item"
+      resources :users
+
   resources :products do
     get :who_bought, on: :member
   end
@@ -22,7 +26,9 @@ Rails.application.routes.draw do
     resources :orders
     resources :line_items
     resources :carts
+    resources :categories
     root 'store#index', as: 'store_index', via: :all
   end
   
 end
+
