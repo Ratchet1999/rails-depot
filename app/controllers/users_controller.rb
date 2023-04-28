@@ -22,12 +22,12 @@ class UsersController < ApplicationController
 
   def orders
     @user = User.find(session[:user_id])
-    render layout: 'myorder'
+    render layout: 'my_orders'
   end
 
   def line_item
     @user = User.find(session[:user_id])
-    render layout: 'myorder'
+    render layout: 'my_orders'
   end
 
   # POST /users or /users.json
