@@ -17,7 +17,10 @@ class Product < ApplicationRecord
   
   before_validation :set_discount_price
   before_destroy :ensure_not_referenced_by_any_line_item
-
+  before_validation do |product|
+    product.title = 'abc' unless product.title
+  end
+  
   private
 
   # ensure that there are no line items referencing this product
@@ -26,9 +29,5 @@ class Product < ApplicationRecord
       errors.add(:base, 'Line Items present')
       throw :abort
     end
-  end
-
-  after_initialize do |product|
-    product.title = 'abc' unless product.title
   end
 end
