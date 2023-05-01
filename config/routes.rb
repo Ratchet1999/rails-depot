@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'sessions/create'
   get 'sessions/destroy'
+  # get '/users/new', to: "products#new"
+
 
   resources :users
   resources :products do
@@ -22,4 +24,5 @@ Rails.application.routes.draw do
     resources :carts
     root 'store#index', as: 'store_index', via: :all
   end
+  
 end
