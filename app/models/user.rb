@@ -17,7 +17,7 @@ class User < ApplicationRecord
   private
 
   def check_user_type
-    if self.email == "admin@depot.com"
+    if self.email == ADMIN_EMAIL
       raise 'Cannot remove admin'
     end
   end
@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def user_type?
-    if self.email == "admin@depot.com"
+    if self.email == ADMIN_EMAIL
       raise "Admin details can't be updated"
     end
   end
