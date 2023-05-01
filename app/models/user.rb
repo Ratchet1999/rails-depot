@@ -8,28 +8,21 @@ class User < ApplicationRecord
 
   after_destroy :ensure_an_admin_remains
   after_create_commit :welcome_mail
-  before_update :user_type
-  before_destroy :check_user_type
+  before_update :ensure_not_admin
+  before_destroy :ensure_not_admin
 
   class Error < StandardError
   end
 
   private
 
-  def check_user_type
-    if self.email == ADMIN_EMAIL
-      raise 'Cannot remove admin'
-    end
+  def ensure_not_admin
+    errors.add :base, 'Cannot Update or Delete Admin User'
+    throw :abort
   end
 
   def welcome_mail
     UserMailer.registered(self).deliver_later
-  end
-
-  def user_type?
-    if self.email == ADMIN_EMAIL
-      raise "Admin details can't be updated"
-    end
   end
 
   def ensure_an_admin_remains
