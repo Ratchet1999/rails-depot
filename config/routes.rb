@@ -9,8 +9,6 @@ Rails.application.routes.draw do
 
   get 'sessions/create'
   get 'sessions/destroy'
-  # get '/users/new', to: "products#new"
-
 
       get "users/orders", to: "users#orders"
       get "users/line_item", to: "users#line_item"
@@ -29,6 +27,4 @@ Rails.application.routes.draw do
     resources :categories
     root 'store#index', as: 'store_index', via: :all
   end
-  
 end
-
