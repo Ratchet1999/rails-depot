@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'store#index', as: 'store_index', via: :all
+  match '*path', to: redirect('404'), via: :all, constraints: -> (req) { req.headers['User-Agent'] =~ FIREFOX_BROWSER_REGEX }
   resources :categories
 
   get 'store' => 'store#index'
@@ -13,8 +15,6 @@ Rails.application.routes.draw do
 
   get 'sessions/create'
   get 'sessions/destroy'
-  # get '/users/new', to: "products#new"
-
 
   get "users/orders", to: "users#orders"
   get "users/line_item", to: "users#line_item"
@@ -29,8 +29,7 @@ Rails.application.routes.draw do
     resources :orders
     resources :line_items
     resources :carts
-    resources :categories
-    root 'store#index', as: 'store_index', via: :all
+
   
     namespace :admin do
       get 'reports', to: 'reports#index'
