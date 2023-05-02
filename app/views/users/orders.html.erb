@@ -10,7 +10,6 @@
   <% total_order_price = 0 %>
   <% order.line_items.each do |line_item| %>
     <%= Product.find(line_item.product_id).title %>
-    &nbsp;&nbsp;
     <%= line_item.total_price %>
     <% total_order_price += line_item.total_price %>
     <br>
