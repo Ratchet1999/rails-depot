@@ -82,7 +82,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(
         :name, :password, :password_confirmation, :email, :role,
-        address_attributes: %i[state country city pincode]
+        address_attributes: [:state, :country, :city, :pincode ]
       )
     end
 end
