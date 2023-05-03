@@ -52,4 +52,3 @@ class ApplicationController < ActionController::Base
     @client_ip = request.ip
   end
 end
-    
