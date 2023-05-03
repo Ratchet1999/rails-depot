@@ -5,7 +5,6 @@ class Order < ApplicationRecord
     "Credit card" => 1,
     "Purchase order" => 2
   }
-
   has_one :user
   has_many :line_items, dependent: :destroy
 
