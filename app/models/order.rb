@@ -5,7 +5,7 @@ class Order < ApplicationRecord
     "Credit card" => 1,
     "Purchase order" => 2
   }
-  has_one :user
+  belongs_to :user, foreign_key: :users_id
   has_many :line_items, dependent: :destroy
 
   validates :name, :address, :email, presence: true
