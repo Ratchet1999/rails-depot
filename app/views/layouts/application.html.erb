@@ -7,10 +7,8 @@
     <%# Prevents cross-site request forgery attacks %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%# Generates link tag to application stylesheet %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-
     <%# Generates script tag to load application scripts %>
     <%= javascript_importmap_tags %>    
   </head>
