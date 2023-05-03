@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Pragprog Books Online Store</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <%# Prevents cross-site request forgery attacks %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
     <%# Generates link tag to application stylesheet %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
     <%# Generates script tag to load application scripts %>
     <%= javascript_importmap_tags %>    
   </head>
@@ -44,15 +46,12 @@
           </nav>
         <% end %>
       </nav>
+      
       <main class="<%= controller.controller_name %>">
         <%# Used by components to render views %>
         <%= yield %>
       </main>
     </section>
-    <footer>
-      <div>Your Hit Count: <%= @user_hit_count || '-' %></div>
-      <div>Total Hit Count: <%= @total_hit_count %></div>
-      <div>Your Ip Address: <%= @client_ip %></div>
-    </footer>
+
   </body>
 </html>
