@@ -16,9 +16,15 @@ class User < ApplicationRecord
 
   private
 
+  def admin?
+    email == ADMIN_EMAIL
+  end
+  
   def ensure_not_admin
-    errors.add :base, 'Cannot Update or Delete Admin User'
-    throw :abort
+    if admin?
+      errors.add :base, 'Cannot Update or Delete Admin User'
+      throw :abort
+    end
   end
 
   def welcome_mail
