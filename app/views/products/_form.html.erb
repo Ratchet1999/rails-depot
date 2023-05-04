@@ -10,6 +10,11 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= form.label :enabled, style: 'display: block' %>
+    <%= form.check_box :enabled, style: 'display: block' %>
+  </div>
+
   <div>
     <%= form.label :title %>
     <%= form.text_field :title %>
@@ -28,6 +33,16 @@
   <div>
     <%= form.label :price %>
     <%= form.text_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :discount_price %>
+    <%= form.number_field :discount_price %>
+  </div>
+
+  <div>
+    <%= form.label :permalink %>
+    <%= form.text_field :permalink %>
   </div>
 
   <div>
