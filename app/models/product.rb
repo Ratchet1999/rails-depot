@@ -25,11 +25,18 @@ class Product < ApplicationRecord
   
   private
 
+  def set_title
+    title = 'abc' unless title || title =~ PRODUCT_TITLE_REGEX
+  end
+
+  def set_discount_price
+    discount_price = price unless discount_price
+  end
+
   # ensure that there are no line items referencing this product
   def ensure_not_referenced_by_any_line_item
     unless line_items.empty?
-      errors.add(:base, 'Line Items present')
-      throw :abort
+      raise 'Product is present in Line Item'
     end
   end
 end
