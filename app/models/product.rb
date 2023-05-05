@@ -2,9 +2,11 @@ class Product < ApplicationRecord
   has_many :line_items
   has_many :orders, through: :line_items
 
-  validates :url, presence: true, url: true
-  validates :title, :description, :permalink, presence: true
-  validates :title, uniqueness: true
+  with_options presence: true do
+    validates :url, url: true
+    validates :title, :description, :permalink
+    validates :title, uniqueness: true
+  end
 
   with_options allow_blank: true do
     validates_with PriceValidator
