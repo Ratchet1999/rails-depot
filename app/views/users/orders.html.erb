@@ -1,2 +1,22 @@
-<h2>Orders</h2>
-<%= render @orders %>
+<% counter = 0%>
+<% @orders.each do |order| %>
+  <h2>ORDER#<%= counter = counter+1 %></h2>
+  customer: <%= order.name %>
+  <br>
+  email: <%= order.email %>
+  <br>
+  <h3>line items:</h3>
+  <br>
+  <% total_order_price = 0 %>
+  <% order.line_items.each do |line_item| %>
+    <%= line_item.product.title %>
+    &nbsp;
+    <%= number_to_currency line_item.total_price %>
+    <% total_order_price += line_item.total_price %>
+    <br>
+  <% end %>
+  <br>
+  Total Price: <%= number_to_currency total_order_price %>
+  <br>
+  <br>
+<% end %>
