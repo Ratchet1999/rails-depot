@@ -5,9 +5,7 @@ class User < ApplicationRecord
   has_many :line_items, through: :orders
 
   validates :name, presence: true, uniqueness: true
-  validates :email, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
-  validates :email, uniqueness: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, allow_blank: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   after_destroy :ensure_an_admin_remains
   after_create_commit :welcome_mail
@@ -19,9 +17,15 @@ class User < ApplicationRecord
 
   private
 
+  def admin?
+    email == ADMIN_EMAIL
+  end
+  
   def ensure_not_admin
-    errors.add :base, 'Cannot Update or Delete Admin User'
-    throw :abort
+    if admin?
+      errors.add :base, 'Cannot Update or Delete Admin User'
+      throw :abort
+    end
   end
 
   def welcome_mail

@@ -11,7 +11,7 @@ gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
-
+gem 'kaminari'
 gem "webpacker"
 # gem "redis", "~> 4.0"
 # gem "kredis"
