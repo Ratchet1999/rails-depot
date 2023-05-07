@@ -1,0 +1,12 @@
+<table>
+<h3>Line Item</h3>
+  <thead>
+    <tr>
+      <td><b>Quantity:</b></td>
+      <td><b>Title:</b></td>
+      <td><b>Total Price:</b></td>
+    </tr>
+  </thead>
+  <%= render @line_items %>
+</table>
+<%= paginate @line_items %>
