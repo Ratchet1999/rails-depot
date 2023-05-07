@@ -1,5 +1,5 @@
 <% counter = 0%>
-<% @user.orders.each do |order| %>
+<% @orders.each do |order| %>
   <h2>ORDER#<%= counter = counter+1 %></h2>
   customer: <%= order.name %>
   <br>
@@ -9,13 +9,14 @@
   <br>
   <% total_order_price = 0 %>
   <% order.line_items.each do |line_item| %>
-    <%= Product.find(line_item.product_id).title %>
-    <%= line_item.total_price %>
+    <%= line_item.product.title %>
+    &nbsp;
+    <%= number_to_currency line_item.total_price %>
     <% total_order_price += line_item.total_price %>
     <br>
   <% end %>
   <br>
-  Total Price: <%= total_order_price %>
+  Total Price: <%= number_to_currency total_order_price %>
   <br>
   <br>
 <% end %>

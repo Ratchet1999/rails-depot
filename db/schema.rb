@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_140520) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_071640) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -61,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_140520) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "line_items_count"
+    t.integer "line_items_count", default: 0, null: false
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -83,6 +83,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_140520) do
     t.integer "pay_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -92,8 +94,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_140520) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "enabled", default: false
-    t.decimal "discount_price"
+    t.boolean "enabled", default: false, null: false
+    t.decimal "discount_price", precision: 5, scale: 2
     t.string "permalink"
   end
 
@@ -120,5 +122,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_140520) do
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
+  add_foreign_key "orders", "users"
   add_foreign_key "support_requests", "orders"
 end
