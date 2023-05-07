@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_071640) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "line_items_count"
+    t.integer "line_items_count", default: 0, null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -111,10 +111,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_071640) do
     t.integer "pay_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "users_id"
     t.integer "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
-    t.index ["users_id"], name: "index_orders_on_users_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -124,7 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_071640) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "enabled", default: false
+    t.boolean "enabled", default: false, null: false
     t.decimal "discount_price", precision: 5, scale: 2
     t.string "permalink"
     t.integer "category_id"
@@ -160,7 +158,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_071640) do
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
   add_foreign_key "orders", "users"
-  add_foreign_key "orders", "users", column: "users_id"
   add_foreign_key "products", "categories"
   add_foreign_key "support_requests", "orders"
 end

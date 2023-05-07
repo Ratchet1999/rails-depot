@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include CurrentUser
+
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
@@ -21,12 +23,12 @@ class UsersController < ApplicationController
   end
 
   def orders
-    @user = User.find(session[:user_id])
+    @orders = current_user.orders
     render layout: 'my_orders'
   end
 
-  def line_item
-    @user = User.find(session[:user_id])
+  def line_items
+    @line_items = current_user.line_items
     render layout: 'my_orders'
   end
 

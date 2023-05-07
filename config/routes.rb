@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
-  get 'my-orders', to: 'users#orders'
-  get 'my-items', to: 'users#line_items'  
+  get 'users/line_items', to: 'users#line_items'
+  get 'users/orders', to: 'users#orders'
+
   resources :users
 
   resources :products, path: '/books' do
