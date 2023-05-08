@@ -24,12 +24,12 @@ class UsersController < ApplicationController
 
   def orders
     @orders = current_user.orders
-    render 'my_orders'
+    render layout: 'my_orders'
   end
 
   def line_items
     @line_items = current_user.line_items
-    render 'my_orders'
+    render layout: 'my_orders'
   end
 
   # POST /users or /users.json
