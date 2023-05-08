@@ -41,9 +41,16 @@ hi:
       user:
         name: 'नाम'
         email: 'ईमेल'
+        role: भूमिका
         password: 'पासवर्ड'
         password_confirmation: 'पासवर्ड पुष्टिकरण'
         
+      order:
+        name: 'नाम'
+        email: 'ईमेल'
+        address: 'पता'
+        pay_type: 'भुगतान प्रकार'
+
       address:
         state: 'राज्य'
         city: 'शहर'

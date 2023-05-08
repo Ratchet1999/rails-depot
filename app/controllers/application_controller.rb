@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
 
   auto_session_timeout 5.minutes
 
+  around_action :switch_locale
   around_action :attach_time_in_header
   before_action :update_hit_counter, only: [:index, :show, :edit, :new]
   before_action :authorize
   before_action :set_i18n_locale_from_params
   before_action :attach_ip_in_header
-  around_action :switch_locale
   # ...
   protected
 
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def switch_locale(&action)
-    locale = params[:locale] || I18n.default_locale
+    locale = LANGUAGES.to_h[current_user.language.capitalize] || I18n.default_locale
     I18n.with_locale(locale, &action)
   end
 end
