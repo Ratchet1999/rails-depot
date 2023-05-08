@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  resources :categories
-
+  get 'admin' => 'admin#index'
   get 'store' => 'store#index'
-  get 'after_login' => 'admin#index'
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
@@ -14,8 +12,9 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
-  get "users/orders", to: "users#orders"
-  get "users/line_item", to: "users#line_item"
+  get 'users/line_items', to: 'users#line_items'
+  get 'users/orders', to: 'users#orders'
+
   resources :users
 
   resources :products do
