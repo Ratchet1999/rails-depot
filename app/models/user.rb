@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_one :address, dependent: :destroy
   has_secure_password
-  has_many :orders, dependent: :destroy, foreign_key: :users_id
+  has_many :orders, dependent: :destroy
   has_many :line_items, through: :orders
 
   validates :name, presence: true, uniqueness: true
