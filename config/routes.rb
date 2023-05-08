@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   match '*path', to: redirect('404'), via: :all, constraints: -> (req) { req.headers['User-Agent'] =~ FIREFOX_BROWSER_REGEX }
 
   get 'store' => 'store#index'
-  get 'after_login' => 'admin#index'
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
