@@ -52,6 +52,12 @@ enable_starttls_auto: true
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.asset_host = 'http://localhost:3000'
+
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.raise_delivery_errors = true
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

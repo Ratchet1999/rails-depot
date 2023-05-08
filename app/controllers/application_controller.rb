@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :authorize
   before_action :set_i18n_locale_from_params
   before_action :attach_ip_in_header
-
+  around_action :switch_locale
   # ...
   protected
 
@@ -50,6 +50,11 @@ class ApplicationController < ActionController::Base
 
   def attach_ip_in_header
     @client_ip = request.ip
+  end
+
+  def switch_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
   end
 end
     

@@ -1,7 +1,12 @@
 class User < ApplicationRecord
+  enum language: {
+    'English' => 'en',
+    'Hindi' => 'hi'
+  }
+  
   has_one :address, dependent: :destroy
   has_secure_password
-  has_many :orders, dependent: :destroy, foreign_key: :users_id
+  has_many :orders, dependent: :destroy
   has_many :line_items, through: :orders
   has_one :hit_count, dependent: :nullify
 
@@ -20,11 +25,12 @@ class User < ApplicationRecord
     role.capitalize == 'Admin'
   end
 
-  private
 
   def admin?
     email == ADMIN_EMAIL
   end
+  
+  private
   
   def ensure_not_admin
     if admin?
