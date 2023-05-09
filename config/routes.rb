@@ -14,18 +14,19 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
-  get 'users/line_items', to: 'users#line_items'
-  get 'users/orders', to: 'users#orders'
-
-  resources :users
+resources :users
+  controller :users do
+    get 'my-items', to: 'users#line_items'
+    get 'my-orders', to: 'users#orders'
+  end
 
   resources :products, path: '/books' do
     get :who_bought, on: :member
   end
 
   resources :categories do
-    resources :products, path: '/books', as: 'books', constraints: { category_id: CATEGORY_ID_REGEX }
-    resources :products, path: '/books', as: 'books', to: redirect('/')
+    resources :books, controller: 'products', constraints: { category_id: INTEGER_ID_REGEX }
+    resources :books, controller: 'products', to: redirect('/')
   end
 
   resources :support_requests, only: [ :index, :update ]

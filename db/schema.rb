@@ -126,7 +126,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_071640) do
     t.decimal "discount_price", precision: 5, scale: 2
     t.string "permalink"
     t.integer "category_id"
-    t.string "image_url2"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
