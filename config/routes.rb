@@ -14,10 +14,10 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
-resources :users
+  resources :users
   controller :users do
-    get 'my-items', to: 'users#line_items'
-    get 'my-orders', to: 'users#orders'
+    get 'my-items' => :line_items
+    get 'my-orders' => :orders
   end
 
   resources :products, path: '/books' do
