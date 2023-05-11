@@ -1,9 +1,12 @@
 class User < ApplicationRecord
   has_secure_password
 
-  validates :name, presence: true, uniqueness: true
-  validates :email, presence: true, allow_blank: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  with_options presence: true do
+    validates :name
+    validates :email, allow_blank: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  end
 
+  after_destroy :ensure_an_admin_remains
   class Error < StandardError
   end
 

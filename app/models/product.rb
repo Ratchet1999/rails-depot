@@ -4,7 +4,7 @@ class Product < ApplicationRecord
 
   with_options presence: true do
     validates :url, url: true
-    validates :title, :description, :permalink
+    validates :description, :permalink
     validates :title, uniqueness: true
   end
 
