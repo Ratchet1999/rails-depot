@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
-  get 'users/line_items', to: 'users#line_items'
-  get 'users/orders', to: 'users#orders'
+  controller :users do
+    get 'line_items' => :line_items
+    get 'orders' => :orders
+  end
 
   resources :users
   resources :products do
