@@ -148,7 +148,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_071157) do
     t.datetime "updated_at", null: false
     t.string "email"
     t.string "role", default: "user"
-    t.string "language", default: "english"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
