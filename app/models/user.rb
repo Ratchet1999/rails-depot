@@ -5,8 +5,8 @@ class User < ApplicationRecord
   has_many :line_items, through: :orders
   has_one :hit_count, dependent: :nullify
 
-  validates :name, presence: true, uniqueness: true
-  validates :email, presence: true, allow_blank: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :name, :email, presence: true
+  validates :email, allow_blank: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   after_destroy :ensure_an_admin_remains
   after_create_commit :welcome_mail
