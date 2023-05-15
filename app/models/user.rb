@@ -21,10 +21,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def admin?
-    email == ADMIN_EMAIL
-  end
   
   def ensure_not_admin
     if admin?
