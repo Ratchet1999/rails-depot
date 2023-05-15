@@ -5,7 +5,7 @@ class LineItem < ApplicationRecord
   
   validates :product_id, uniqueness: { scope: :cart_id }, if: :cart
   
-  paginates_per 5
+  paginates_per DEFAULT_NUMBER_OF_PAGES
   
   def total_price
     product.price * quantity
