@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'admin' => 'admin#index'
+  root 'store#index', as: 'store_index', via: :all
+  match '*path', to: redirect('404'), via: :all, constraints: -> (req) { req.headers['User-Agent'] =~ FIREFOX_BROWSER_REGEX }
+
   get 'store' => 'store#index'
   controller :sessions do
     get 'login' => :new
@@ -12,15 +14,19 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
+  resources :users
   controller :users do
-    get 'users/line_items' => :line_items
-    get 'users/orders' => :orders
+    get 'my-items' => :line_items
+    get 'my-orders' => :orders
   end
 
-  resources :users
-
-  resources :products do
+  resources :products, path: '/books' do
     get :who_bought, on: :member
+  end
+
+  resources :categories do
+    resources :books, controller: 'products', constraints: { category_id: INTEGER_ID_REGEX }
+    resources :books, controller: 'products', to: redirect('/')
   end
 
   resources :support_requests, only: [ :index, :update ]
@@ -28,8 +34,7 @@ Rails.application.routes.draw do
     resources :orders
     resources :line_items
     resources :carts
-    resources :categories
-    root 'store#index', as: 'store_index', via: :all
+
   
     namespace :admin do
       get 'reports', to: 'reports#index'

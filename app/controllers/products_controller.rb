@@ -4,6 +4,9 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products = Product.all.order(:title)
+    if params[:category_id]
+      @products = @products.where(category_id: params[:category_id])
+    end
   end
 
   # GET /products/1 or /products/1.json
