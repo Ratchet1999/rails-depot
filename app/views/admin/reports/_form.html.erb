@@ -1,0 +1,16 @@
+<%= form_with do |form| %>
+
+  <div class="field">
+    <%= form.label :from ,"From:" %>
+    <%= form.date_field :from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :to ,"To:" %>
+    <%= form.date_field :to %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Search' %>
+  </div>
+<% end %>

@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   get 'admin' => 'admin#index'
+  get 'store' => 'store#index'
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
   end
+
+
 
   get 'sessions/create'
   get 'sessions/destroy'
@@ -21,12 +24,16 @@ Rails.application.routes.draw do
   end
 
   resources :support_requests, only: [ :index, :update ]
-  
-  scope '(:locale)' do
+
     resources :orders
     resources :line_items
     resources :carts
     resources :categories
     root 'store#index', as: 'store_index', via: :all
-  end
+  
+    namespace :admin do
+      get 'reports', to: 'reports#index'
+      post 'reports', to: 'reports#index'
+      get 'categories', to: 'categories#index'
+    end
 end
