@@ -10,9 +10,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :enabled, style: 'display: block' %>
-    <%= form.check_box :enabled, style: 'display: block' %>
+  <div>
+    <%= form.label :enabled %>
+    <%= form.check_box :enabled %>
   </div>
 
   <div>
@@ -30,6 +30,11 @@
     <%= form.text_field :image_url %>
   </div>
 
+  <div class="field">
+    <%= form.label :category_id, style: 'display: block' %>
+    <%= form.collection_select :category_id , Category.order(:name), :id, :name, include_blank: t('form.select.select_one') %>
+  </div>
+
   <div>
     <%= form.label :price %>
     <%= form.text_field :price %>
@@ -44,6 +49,12 @@
     <%= form.label :permalink %>
     <%= form.text_field :permalink %>
   </div>
+
+  <div class="field">
+    <%= form.label :images, 'Product Images' %>
+    <%= form.file_field :images, accept: 'image/png,image/gif,image/jpeg,image/jpg' ,multiple: true%>
+  </div>
+  <br></br>
 
   <div>
     <%= form.submit %>

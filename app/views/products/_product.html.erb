@@ -19,4 +19,11 @@
     <%= product.price %>
   </p>
 
+  <div class="image-container">
+    <% product.images.each do |image| %>
+      <%= image_tag generate_image_url(image), width: '250', height: '250' %>
+    <% end %>
+  </div>
+  <br></br>
+
 </div>

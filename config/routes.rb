@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
+
   resources :products do
     get :who_bought, on: :member
   end
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
     resources :orders
     resources :line_items
     resources :carts
+    resources :categories
     root 'store#index', as: 'store_index', via: :all
   end
 end

@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.build_address
   end
 
   # GET /users/1/edit
@@ -23,16 +24,18 @@ class UsersController < ApplicationController
 
   def orders
     @orders = current_user.orders
+    render layout: 'my_orders'
   end
 
   def line_items
     @line_items = current_user.line_items
+    render layout: 'my_orders'
   end
 
   # POST /users or /users.json
   def create
-    @user = User.new(user_params)
-
+    @user = User.new(user_params.except(:address_attributes))
+    @user.build_address(user_params[:address_attributes])
     respond_to do |format|
       if @user.save
         format.html { redirect_to users_url,notice: "User #{@user.name} was successfully created." }
@@ -47,7 +50,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(user_params) && @user.address.first.update(user_params[:addresses_attributes])
         format.html { redirect_to users_url,notice: "User #{@user.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -78,6 +81,10 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :password, :password_confirmation, :email)
+      params.require(:user).permit(
+        :name, :password, :password_confirmation, :email,
+        address_attributes: [:state, :country, :city, :pincode ]
+      )
     end
 end
+
