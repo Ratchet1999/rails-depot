@@ -17,8 +17,12 @@ class Product < ApplicationRecord
     validates :discount_price, numericality: { less_than_or_equal_to: :price, message: "Discount Price can't be greater than Original Price" }, if: :price 
   end
   
-  before_validation :set_discount_price, unless: :discount_price?
-  before_validation :set_title, unless: :title?
+  before_validation :set_discount_price
+  before_validation :set_title
+
+  scope :enabled_products, -> { where(enabled:true) }
+  scope :products_ordered, -> { joins(:line_items).distinct }
+  scope :product_title, ->{ products_ordered.pluck(:title) }
   
   private
 
