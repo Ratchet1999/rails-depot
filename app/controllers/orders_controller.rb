@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   include CurrentCart
+  include CurrentUser
   skip_before_action :authorize, only: [:new, :create]
   before_action :set_cart, only: [:new, :create]
   before_action :ensure_cart_isnt_empty, only: :new
@@ -25,10 +26,8 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    @order = Order.new(order_params)
+    @order = current_user.orders.build(order_params)
     @order.add_line_items_from_cart(@cart)
-
-    @order.save!
 
     respond_to do |format|
       if @order.save

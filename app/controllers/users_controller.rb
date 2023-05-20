@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include CurrentUser
+
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
@@ -17,6 +19,14 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  def orders
+    @orders = current_user.orders
+  end
+
+  def line_items
+    @line_items = current_user.line_items
   end
 
   # POST /users or /users.json
