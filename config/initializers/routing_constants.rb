@@ -1,2 +1,1 @@
-CATEGORY_ID_REGEX = /[\d]+/
 FIREFOX_BROWSER_REGEX = /firefox/i
