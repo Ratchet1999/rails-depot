@@ -6,6 +6,7 @@ class OrderMailer < ApplicationMailer
   #   en.order_mailer.received.subject
   #
   def received(order)
+    @order = order
     order.line_items.each do |line_item|
       images = line_item.product.images.to_a
       attachments.inline["#{line_item.id}_first.jpg"] = images.shift.download
