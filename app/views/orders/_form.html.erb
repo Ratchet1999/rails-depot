@@ -1,7 +1,7 @@
 <%= form_with(model: order, local: true) do |form| %>
   <% if order.errors.any? %>
   <div id="error_explanation">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+      <h2> <%= raw t('errors.template.header', count: order.errors.count, model: t('activerecord.models.order')) %></h2>
       <ul>
         <% order.errors.each do |error| %>
           <li><%= error.full_message %></li>

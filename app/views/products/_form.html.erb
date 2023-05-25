@@ -1,7 +1,7 @@
 <%= form_with(model: product) do |form| %>
   <% if product.errors.any? %>
     <div class="form-errors">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <h2> <%= raw t('errors.template.header', count: product.errors.count, model: t('activerecord.models.product')) %></h2>
       <ul>
         <% product.errors.each do |error| %>
           <li><%= error.full_message %></li>
